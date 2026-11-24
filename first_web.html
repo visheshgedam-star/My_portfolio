@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishesh Gedam | Portfolio</title>
+    <style>
+        /* Google Fonts Import for Modern Typography */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        /* CSS Variables for Easy Theme Management */
+        :root {
+            --bg-dark: #090d16;
+            --card-bg: rgba(18, 25, 43, 0.75);
+            --loki-green: #00e676;
+            --loki-gold: #ffd700;
+            --doom-silver: #94a3b8;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at top right, #0f2922, var(--bg-dark) 50%, #05070c);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Main Glassmorphic Container */
+        .portfolio-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 230, 118, 0.25);
+            border-radius: 24px;
+            padding: 45px 40px;
+            max-width: 780px;
+            width: 100%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.65), 
+                        0 0 30px rgba(0, 230, 118, 0.12);
+            animation: slideUpFade 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            position: relative;
+        }
+
+        /* Subtle Top Accent Line */
+        .portfolio-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--loki-green), var(--loki-gold), transparent);
+            border-radius: 50%;
+        }
+
+        /* Heading with Gradient & Floating Glow */
+        h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            background: linear-gradient(90deg, var(--loki-green), var(--loki-gold), var(--loki-green));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 4s linear infinite;
+        }
+
+        /* Info Card Grid */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .bio-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 4px solid var(--loki-green);
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 0.98rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInItem 0.6s ease forwards;
+        }
+
+        /* Staggered Animation Delays for Bio Items */
+        .bio-item:nth-child(1) { animation-delay: 0.15s; }
+        .bio-item:nth-child(2) { animation-delay: 0.25s; }
+        .bio-item:nth-child(3) { animation-delay: 0.35s; }
+        .bio-item:nth-child(4) { animation-delay: 0.45s; }
+        .bio-item:nth-child(5) { animation-delay: 0.55s; }
+        .bio-item:nth-child(6) { animation-delay: 0.65s; }
+
+        .bio-item strong {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        .bio-item:hover {
+            transform: translateY(-4px) translateX(4px);
+            background: rgba(0, 230, 118, 0.08);
+            border-color: rgba(0, 230, 118, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 230, 118, 0.15);
+        }
+
+        /* Interactive Button Link */
+        .btn-wrapper {
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .google-btn {
+            display: inline-block;
+            padding: 12px 34px;
+            background: linear-gradient(135deg, var(--loki-green), #00b359);
+            color: #05140c;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(0, 230, 118, 0.35);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .google-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: linear-gradient(135deg, var(--loki-gold), #ffaa00);
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.45);
+        }
+
+        /* Styled Divider */
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.5), rgba(255, 215, 0, 0.5), transparent);
+            margin: 35px 0;
+        }
+
+        /* Marvel Image Gallery */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .image-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+
+        .image-card img {
+            display: block;
+            height: 300px;
+            width: auto;
+            max-width: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Hover Zoom & Neon Border Effect */
+        .image-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--loki-green);
+            box-shadow: 0 15px 35px rgba(0, 230, 118, 0.35);
+        }
+
+        .image-card:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Quotes / Fandom Badges Section */
+        .fandom-tags {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .tag {
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .tag b {
+            color: var(--loki-green);
+        }
+
+        .tag i {
+            color: var(--loki-gold);
+        }
+
+        .tag u {
+            text-decoration-color: var(--loki-green);
+            text-underline-offset: 4px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .tag:hover {
+            transform: scale(1.06);
+            background: rgba(255, 255, 255, 0.09);
+            border-color: var(--loki-gold);
+        }
+
+        /* Subtle Pulse on "Doomsday is coming" */
+        .doomsday-alert {
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        /* Keyframe Animations */
+        @keyframes slideUpFade {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInItem {
+            0% {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmerText {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 8px rgba(0, 230, 118, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 18px rgba(0, 230, 118, 0.6);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .portfolio-container {
+                padding: 30px 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .image-card img {
+                height: 260px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-container">
+        <h1>My Portfolio</h1>
+
+        <!-- Replaced rigid <pre> tag with responsive animated cards -->
+        <div class="bio-grid">
+            <div class="bio-item"><strong>Name:</strong> Vishesh Gedam</div>
+            <div class="bio-item"><strong>Date of Birth:</strong> 20/04/2007</div>
+            <div class="bio-item"><strong>College:</strong> Student of BIT Durg</div>
+            <div class="bio-item"><strong>Class 12th Percentage:</strong> 80%</div>
+            <div class="bio-item"><strong>Location:</strong> Living in Durg right now</div>
+            <div class="bio-item"><strong>Goal:</strong> Looking forward to being a great coder</div>
+        </div>
+
+        <div class="btn-wrapper">
+            <a class="google-btn" href="https://www.google.com/webhp?hl=en" target="_blank" rel="noopener noreferrer">Visit Google</a>
+        </div>
+
+        <hr />
+
+        <div class="gallery">
+            <div class="image-card">
+                <img src="https://m.media-amazon.com/images/M/MV5BYzA2YjM2ZWQtYTZhMS00OTI3LTlhYzQtZjBiZWZkMDdlNjA5XkEyXkFqcGc@._V1_.jpg" alt="Loki" />
+            </div>
+            <div class="image-card">
+                <img src="https://images.thedirect.com/media/article_full/lokidoom_bYRsQ3M.jpg" alt="Doomsday" />
+            </div>
+        </div>
+
+        <div class="fandom-tags">
+            <div class="tag"><b>Loki is my favourite Marvel character</b></div>
+            <div class="tag"><i>RDJ is GOAT as always</i></div>
+            <div class="tag doomsday-alert"><u>Doomsday is coming</u></div>
+        </div>
+    </div>
+
+</body>
+</html>
